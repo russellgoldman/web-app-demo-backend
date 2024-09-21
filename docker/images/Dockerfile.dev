@@ -1,0 +1,17 @@
+FROM python:3.12.6-alpine3.20
+
+# Set the working directory
+WORKDIR /app
+
+# Copy all required files for the development environment
+COPY ./requirements.txt .
+COPY ./src/ ./src/
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose the backend server on port 8080
+EXPOSE 8080
+
+# Run the development server on localhost
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]

@@ -1,0 +1,7 @@
+services:
+  backend:
+    build:
+      context: ../..
+      dockerfile: docker/images/Dockerfile.dev
+    ports:
+      - "8080:8080"

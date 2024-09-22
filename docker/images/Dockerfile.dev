@@ -3,12 +3,24 @@ FROM python:3.12.6-alpine3.20
 # Set the working directory
 WORKDIR /app
 
-# Copy all required files for the development environment
-COPY ./requirements.txt .
-COPY ./src/ ./src/
+# Some required Python dependencies, such as pymssql, have C extensions
+# and require certain utilities be installed on Alpine Linux. This is
+# necessary to ensure their Python wheels are properly built with pip.
+RUN apk update && apk add --no-cache \
+	gcc \	
+	musl-dev \
+	unixodbc-dev \
+	freetds-dev \
+	krb5-dev \
+	libressl-dev
 
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copy all required files for the development environment
+COPY ./src/ ./src/
+COPY ./.env ./.env
 
 # Expose the development server on port 8080
 EXPOSE 8080

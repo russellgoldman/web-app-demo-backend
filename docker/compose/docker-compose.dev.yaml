@@ -12,15 +12,14 @@ services:
     restart: on-failure
     environment:
       - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=${MSSQL_DEV_PASSWORD}
+      - MSSQL_SA_PASSWORD=${MSSQL_PASSWORD}
       - MSSQL_PID=Developer
     ports:
       - "1433:1433"
   flyway:
     container_name: flyway
     image: flyway/flyway
-    command: ["-url=jdbc:sqlserver://mssql:1433;encrypt=true;trustServerCertificate=true", "-user=sa", "-password=${MSSQL_DEV_PASSWORD}", "-X", "migrate"]
-    restart: on-failure
+    command: ["-url=jdbc:sqlserver://mssql:1433;encrypt=true;trustServerCertificate=true", "-user=sa", "-password=${MSSQL_PASSWORD}", "-X", "migrate"]
     depends_on:
       - mssql
     volumes:

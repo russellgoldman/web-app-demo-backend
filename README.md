@@ -4,8 +4,7 @@ Please ensure you have the most up-to-date version of Docker installed on your c
 
 ## Development Environment
 ### Starting the Environment
-To start the development environment, please run 
-`make dev-up`.
+To start the development environment, please run `make dev-up`. It can be accessed on `http://0.0.0.0:8080`.
 
 This command will boot up the following services (as defined in `docker/compose/docker-compose.dev.yaml`):
 - FastAPI Backend Server

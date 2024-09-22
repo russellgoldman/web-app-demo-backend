@@ -5,3 +5,23 @@ services:
       dockerfile: docker/images/Dockerfile.dev
     ports:
       - "8080:8080"
+  mssql:
+    container_name: mssql
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
+    restart: on-failure
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${MSSQL_DEV_PASSWORD}
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+  flyway:
+    container_name: flyway
+    image: flyway/flyway
+    command: ["-url=jdbc:sqlserver://mssql:1433;encrypt=true;trustServerCertificate=true", "-user=sa", "-password=${MSSQL_DEV_PASSWORD}", "-X", "migrate"]
+    restart: on-failure
+    depends_on:
+      - mssql
+    volumes:
+      - ../../src/db/mssql/migrations/:/flyway/sql

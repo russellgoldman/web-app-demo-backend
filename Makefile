@@ -1,3 +1,4 @@
+ENV_FILE=.env
 DEV_COMPOSE_FILE=docker/compose/docker-compose.dev.yaml
 # TEST_COMPOSE_FILE=
 # STAGING_COMPOSE_FILE=
@@ -5,7 +6,7 @@ DEV_COMPOSE_FILE=docker/compose/docker-compose.dev.yaml
 # Development Environment Commands
 .PHONY: dev-up
 dev-up:
-	docker-compose -f $(DEV_COMPOSE_FILE) up -d
+	docker-compose -f $(DEV_COMPOSE_FILE) --env-file ${ENV_FILE} up -d
 
 .PHONY: dev-down
 dev-down:
@@ -17,4 +18,4 @@ dev-logs:
 
 .PHONY: dev-restart
 dev-restart:
-	docker-compose -f $(DEV_COMPOSE_FILE) up --build -d
+	docker-compose -f $(DEV_COMPOSE_FILE) --env-file ${ENV_FILE} up --build -d

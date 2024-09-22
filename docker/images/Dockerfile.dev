@@ -10,7 +10,7 @@ COPY ./src/ ./src/
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the backend server on port 8080
+# Expose the development server on port 8080
 EXPOSE 8080
 
 # Run the development server on localhost

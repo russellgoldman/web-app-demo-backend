@@ -2,7 +2,6 @@ from fastapi import APIRouter, status, Query
 from fastapi.responses import JSONResponse
 from enum import Enum
 from typing import Optional
-
 from src.db.mssql import mssql
 
 router = APIRouter()
@@ -14,11 +13,15 @@ class RecordSearchParam(str, Enum):
    clusterId = "clusterId"
 
 @router.get("/records/{start_epoch}/{end_epoch}", status_code=status.HTTP_200_OK)
+@router.get(
+    "/records/{start_epoch}/{end_epoch}/{record_search_param}/{record_search_value}",
+    status_code=status.HTTP_200_OK
+)
 def get_records(
-   start_epoch: int,
-   end_epoch: int,
-   record_search_param: Optional[str] = Query(None, alias="record_search_param"),
-   record_search_value: Optional[str] = Query(None, alias="record_search_value")
+    start_epoch: int,
+    end_epoch: int,
+    record_search_param: Optional[str] = None,
+    record_search_value: Optional[str] = None
 ):
    conn = mssql.get_mssql_conn()
    cursor = conn.cursor(as_dict=True)

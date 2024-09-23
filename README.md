@@ -8,6 +8,9 @@ To start the development environment, please run `make dev-up`. It can be access
 
 This command will boot up the following services (as defined in `docker/compose/docker-compose.dev.yaml`):
 - FastAPI Backend Server
+- Microsoft SQL Server
+- Flyway Migration Server
+    - Used to migrate SQL files in the `src/db/mssql/migrations` folder by version number
 
 ### View Environment Logs
 To view the logs of the running development environment, please run `make dev-logs`.
@@ -15,5 +18,13 @@ To view the logs of the running development environment, please run `make dev-lo
 ### Stopping the Environment
 To stop the running development environment, please run `make dev-down`.
 
-## Restart the Environment
+### Restart the Environment
 To rebuild and subsequently start the development environment (if any changes have been made to the project), please run `make dev-restart`.
+
+## Swagger Documentation
+To view the Swagger docs, please visit `http://0.0.0.0:8080/docs` once the development environment is running.
+
+## SQL Schema Normalization
+A normalized SQL schema has been created and can be found in `src/db/mssql/migrations/V2__create_voice_table.sql`.
+
+The schema has been normalized up to Boyce-Codd Normal Form (BCNF).

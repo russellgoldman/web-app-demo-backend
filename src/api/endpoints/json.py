@@ -20,8 +20,11 @@ def get_records(
     record_search_value: Optional[str] = None
 ):
     try:
-        file_name = 'sample_records.json'
-        file_path = os.path.join(os.path.dirname(__file__), '../../', file_name)
+        if start_epoch > end_epoch:
+            raise ValueError("The start_epoch cannot occur after the end_epoch. Please resolve this and try again")
+
+        file_name = "sample_records.json"
+        file_path = os.path.join(os.path.dirname(__file__), "../../", file_name)
         voice_record_filter = VoiceRecordFilter(file_path)
 
         return JSONResponse(content=voice_record_filter.filter_records(
@@ -30,11 +33,11 @@ def get_records(
             record_search_param=record_search_param,
             record_search_value=record_search_value
         ))
-    except ValueError as err:
-        raise HTTPException(status_code=400, detail=str(err))
     except FileNotFoundError as err:
         raise HTTPException(status_code=404, detail=str(err))
     except json.JSONDecodeError as err:
         raise HTTPException(status_code=500, detail=str(err))
+    except ValueError as err:
+        raise HTTPException(status_code=400, detail=str(err))
     except Exception as err:
         raise HTTPException(status_code=500, detail=str(err))

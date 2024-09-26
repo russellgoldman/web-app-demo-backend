@@ -1,0 +1,8 @@
+services:
+  pytest:
+    build:
+      context: ../..
+      dockerfile: docker/images/Dockerfile.test
+    tty: true
+    stdin_open: true
+    restart: "no"

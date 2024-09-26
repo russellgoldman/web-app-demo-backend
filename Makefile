@@ -1,6 +1,6 @@
 ENV_FILE=.env
 DEV_COMPOSE_FILE=docker/compose/docker-compose.dev.yaml
-# TEST_COMPOSE_FILE=
+TEST_COMPOSE_FILE=docker/compose/docker-compose.test.yaml
 
 # Development Environment Commands
 .PHONY: dev-up
@@ -18,3 +18,8 @@ dev-logs:
 .PHONY: dev-restart
 dev-restart:
 	docker-compose -f $(DEV_COMPOSE_FILE) --env-file ${ENV_FILE} up --build -d
+
+# Test Environment Commands
+.PHONY: test
+test:
+	docker-compose -f $(TEST_COMPOSE_FILE) up --build

@@ -3,14 +3,9 @@ from fastapi.responses import JSONResponse
 from enum import Enum
 from typing import Optional
 from src.db.mssql import mssql
+from src.constants import RecordSearchParam
 
 router = APIRouter()
-
-class RecordSearchParam(str, Enum):
-   phone = "phone"
-   voicemail = "voicemail"
-   userId = "userId"
-   clusterId = "clusterId"
 
 @router.get("/records/{start_epoch}/{end_epoch}", status_code=status.HTTP_200_OK)
 @router.get(

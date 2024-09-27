@@ -7,8 +7,9 @@ from src.utils.voice_record_filter import VoiceRecordFilter
 from src.constants import RecordSearchParam
 
 class TestJSONUnit(unittest.TestCase):
-    def setUp(self):
-        self.test_client = TestClient(app)
+    @classmethod
+    def setUpClass(cls):
+        cls.test_client = TestClient(app)
     
     @patch('src.api.endpoints.json.VoiceRecordFilter.__init__', return_value=None)
     @patch.object(VoiceRecordFilter, 'filter_records')
@@ -52,7 +53,7 @@ class TestJSONUnit(unittest.TestCase):
     
     @patch('src.api.endpoints.json.VoiceRecordFilter.__init__', return_value=None)
     @patch.object(VoiceRecordFilter, 'filter_records')
-    def test_get_records_with_parameter(self, mock_filter_records: MagicMock, mock_init: MagicMock):
+    def test_get_records_with_param(self, mock_filter_records: MagicMock, mock_init: MagicMock):
         mocked_return_value = [
             {
                 "_id": 12345,

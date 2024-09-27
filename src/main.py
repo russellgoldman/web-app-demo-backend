@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.api.endpoints import health, mssql
+from src.api.endpoints import health, mssql, json
 from dotenv import load_dotenv, find_dotenv
 import os
 
@@ -16,3 +16,4 @@ app.add_middleware(
 )
 app.include_router(health.router, prefix="/health")
 app.include_router(mssql.router, prefix="/mssql")
+app.include_router(json.router, prefix="/json")

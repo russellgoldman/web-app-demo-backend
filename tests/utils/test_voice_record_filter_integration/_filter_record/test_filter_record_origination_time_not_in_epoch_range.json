@@ -1,0 +1,12 @@
+[
+    {
+        "_id": 12345,
+        "originationTime": 1656788800,
+        "clusterId": "domainserver1",
+        "userId": "555666777",
+        "devices": {
+            "phone": "SEP123123234234",
+            "voicemail": "555666777VM"
+        }
+    }
+]

@@ -18,6 +18,9 @@ class VoiceRecordFilter:
         record_search_param: Optional[str] = None,
         record_search_value: Optional[str] = None
     ) -> List[Dict]:
+        if start_epoch > end_epoch:
+            raise ValueError("The start_epoch cannot occur after the end_epoch. Please resolve this and try again")
+
         if record_search_param:
             try:
                 record_search_param = RecordSearchParam(record_search_param)
@@ -48,7 +51,7 @@ class VoiceRecordFilter:
             end_epoch: int,
             record_search_param: Optional[str] = None,
             record_search_value: Optional[str] = None,
-        ) -> bool:            
+        ) -> bool:
             # Since start_epoch and end_epoch are required parameters, I have deduced that "originationTime" must be present in every valid record
             if "originationTime" not in record:
                 raise ValueError("Every record in the JSON file is expected to contain an 'originationTime'. Please verify and try again.")

@@ -1,0 +1,31 @@
+[
+    {
+        "_id": 12345,
+        "originationTime": 1656788800,
+        "clusterId": "domainserver1",
+        "userId": "555666777",
+        "devices": {
+            "phone": "SEP123123234234",
+            "voicemail": "555666777VM"
+        }
+    },
+    {
+        "_id": 12346,
+        "clusterId": "domainserver1",
+        "userId": "472917482",
+        "devices": {
+            "phone": "SEP123123234234",
+            "voicemail": "111222333VM"
+        }
+    },
+    {
+        "_id": 12347,
+        "originationTime": 1630454400,
+        "clusterId": "domainserver3",
+        "userId": "555666777",
+        "devices": {
+            "phone": "SEP234567890123",
+            "voicemail": "555666777VM"
+        }
+    }
+]

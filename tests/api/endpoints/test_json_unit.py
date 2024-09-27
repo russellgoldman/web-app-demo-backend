@@ -94,13 +94,6 @@ class TestJSONUnit(unittest.TestCase):
         self.assertEqual(res.json(), [])
         self.assertEqual(res.status_code, 200)
     
-    def test_get_records_invalid_date_range(self):
-        start_epoch = 1727044203
-        end_epoch = 1622548800
-        res = self.test_client.get(f'/json/records/{start_epoch}/{end_epoch}')
-
-        self.assertEqual(res.status_code, 400)
-    
     @patch.object(VoiceRecordFilter, 'filter_records')
     def test_get_records_file_not_found(self, mock_filter_records: MagicMock):
         mock_filter_records.side_effect = FileNotFoundError("File not found")

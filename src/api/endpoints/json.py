@@ -20,9 +20,6 @@ def get_records(
     record_search_value: Optional[str] = None
 ):
     try:
-        if start_epoch > end_epoch:
-            raise ValueError("The start_epoch cannot occur after the end_epoch. Please resolve this and try again")
-
         file_name = "sample_records.json"
         file_path = os.path.join(os.path.dirname(__file__), "../../", file_name)
         voice_record_filter = VoiceRecordFilter(file_path)
